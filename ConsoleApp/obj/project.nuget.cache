@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "N4D2NvkHMLJwCb+ucflwMb+AWsCsYE1FVqYbA6DUD0FnRutrmgEqS5bxxL306HQrWfT577x3dTX2kuj6OpwXxw==",
+  "dgSpecHash": "+xrR1KI0Wo7XUgnc3t1Enk8ADPIb5zt6QrqFQ2mBxtZNXRtNcHHHiNGZffhVgmWJ6Jyk30KS+X/wGU9sjnXSqA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Dev\\CSharpProjects\\ConsoleApp\\Dev.csproj",
+  "projectFilePath": "C:\\Users\\Dev\\CSharpProjects\\ConsoleQuestionGame\\ConsoleApp\\Dev.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

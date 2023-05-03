@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dev\\CSharpProjects\\ConsoleApp\\Dev.csproj": {}
+    "C:\\Users\\Dev\\CSharpProjects\\ConsoleQuestionGame\\ConsoleApp\\Dev.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dev\\CSharpProjects\\ConsoleApp\\Dev.csproj": {
+    "C:\\Users\\Dev\\CSharpProjects\\ConsoleQuestionGame\\ConsoleApp\\Dev.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dev\\CSharpProjects\\ConsoleApp\\Dev.csproj",
+        "projectUniqueName": "C:\\Users\\Dev\\CSharpProjects\\ConsoleQuestionGame\\ConsoleApp\\Dev.csproj",
         "projectName": "Dev",
-        "projectPath": "C:\\Users\\Dev\\CSharpProjects\\ConsoleApp\\Dev.csproj",
+        "projectPath": "C:\\Users\\Dev\\CSharpProjects\\ConsoleQuestionGame\\ConsoleApp\\Dev.csproj",
         "packagesPath": "C:\\Users\\Dev\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dev\\CSharpProjects\\ConsoleApp\\obj\\",
+        "outputPath": "C:\\Users\\Dev\\CSharpProjects\\ConsoleQuestionGame\\ConsoleApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
