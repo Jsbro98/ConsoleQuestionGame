@@ -39,7 +39,60 @@ namespace ConsoleApp
             string colorChoice;
             string feelingChoice;
             string representsChoice;
-            string favoriteColorChoice;
+            char favoriteColorChoice;
+
+            void WriteQuestionAndCheckResponse(string propertyName)
+            {
+                PropertyInfo? propInfo = typeof(Color).GetProperty(propertyName);
+                object? propValueRed = null;
+                object? propValueBlue = null;
+                object? propValueYellow = null;
+
+
+                if (propInfo is not null)
+                {
+                    propValueRed = propInfo.GetValue(red);
+                    propValueBlue = propInfo.GetValue(blue);
+                    propValueYellow = propInfo.GetValue(yellow);
+                }
+
+                // Continue here -------------------------------------------------------------------------------------
+
+                if (propValueRed is not null)
+
+                while(true)
+            {
+                foreach (Color color in colorArray)
+                {
+                    Console.Write( + " ");
+                }
+
+                Console.WriteLine();
+
+                colorChoice = Console.ReadLine()!;
+
+                if ( !String.IsNullOrEmpty(colorChoice) )
+                {
+                    colorChoice = colorChoice.ToLower();
+                    colorChoice = Char.ToUpper(colorChoice[0]) + colorChoice.Substring(1);
+                    
+                    if (colorChoice != red.Name && colorChoice != blue.Name && colorChoice != yellow.Name)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Please choose a valid color.");
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Please choose a color.");
+                }
+            }
+
+            }
 
             while(true)
             {
@@ -105,6 +158,63 @@ namespace ConsoleApp
                 else
                 {
                     Console.WriteLine("Please enter a feeling.");
+                }
+            }
+
+            while (true)
+            {
+                Console.WriteLine();
+                Console.WriteLine("What does the color represent? Please choose from the choices below");
+
+                foreach (Color color in colorArray)
+                {
+                    Console.Write(color.Represents + " ");
+                }
+
+                Console.WriteLine();
+
+                representsChoice = Console.ReadLine()!;
+
+                if ( !String.IsNullOrEmpty(representsChoice) )
+                {
+                    representsChoice = representsChoice.ToLower();
+                    representsChoice = Char.ToUpper(representsChoice[0]) + representsChoice.Substring(1);
+
+                    if (representsChoice != red.Represents && representsChoice != blue.Represents && representsChoice != yellow.Represents)
+                    {
+                        Console.WriteLine("Please choose a representation from the options listed.");
+                        representsChoice = "";
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Please enter a representation.");
+                }
+            }
+
+            while (true)
+            {
+                Console.WriteLine();
+                Console.WriteLine("is this color your favorite color? (Y/N)");
+
+                try
+                {
+                    favoriteColorChoice = Convert.ToChar( Console.ReadLine()! );
+
+                    if ( Char.IsLetter(favoriteColorChoice) )
+                    {
+                        break;
+                    }
+                }
+                catch (FormatException error)
+                {
+                    Console.WriteLine(error);
+                    Console.WriteLine();
+                    Console.WriteLine("Please enter (Y/N)");
                 }
             }
         }
