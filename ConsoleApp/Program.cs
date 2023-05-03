@@ -36,8 +36,6 @@ namespace ConsoleApp
             Console.WriteLine();
             Console.WriteLine("Please pick a color.");
 
-            string colorChoice;
-
             while(true)
             {
                 foreach (Color color in colorArray)
@@ -45,15 +43,16 @@ namespace ConsoleApp
                     Console.Write(color.Name + " ");
                 }
 
-                colorChoice = Console.ReadLine().ToLower();
+                string? colorChoice = Console.ReadLine();
 
-                if ( String.IsNullOrEmpty(colorChoice) )
+                if (colorChoice is not null)
                 {
-                    Console.WriteLine("Please choose a color.");
+                    colorChoice = colorChoice.ToLower();
+                    break;
                 }
                 else
                 {
-                    break;
+                    Console.WriteLine("Please choose a color.");
                 }
             }
         }
