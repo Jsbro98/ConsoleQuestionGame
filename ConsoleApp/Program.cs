@@ -41,7 +41,7 @@ namespace ConsoleApp
             string representsChoice;
             char favoriteColorChoice;
 
-            void WriteQuestionAndCheckResponse(string propertyName)
+            string WriteQuestionAndCheckResponse(string propertyName)
             {
                 PropertyInfo? propInfo = typeof(Color).GetProperty(propertyName);
                 object? propValueRed = null;
@@ -56,42 +56,42 @@ namespace ConsoleApp
                     propValueYellow = propInfo.GetValue(yellow);
                 }
 
+
+                if (propValueRed is not null && propValueBlue is not null && propValueYellow is not null)
+                {
+                    while(true)
+                    {
+                        Console.Write(propValueRed + " ");
+                        Console.Write(propValueBlue + " ");
+                        Console.Write(propValueYellow);
+
+                        Console.WriteLine();
+
                 // Continue here -------------------------------------------------------------------------------------
 
-                if (propValueRed is not null)
+                        colorChoice = Console.ReadLine()!;
 
-                while(true)
-            {
-                foreach (Color color in colorArray)
-                {
-                    Console.Write( + " ");
-                }
-
-                Console.WriteLine();
-
-                colorChoice = Console.ReadLine()!;
-
-                if ( !String.IsNullOrEmpty(colorChoice) )
-                {
-                    colorChoice = colorChoice.ToLower();
-                    colorChoice = Char.ToUpper(colorChoice[0]) + colorChoice.Substring(1);
-                    
-                    if (colorChoice != red.Name && colorChoice != blue.Name && colorChoice != yellow.Name)
-                    {
-                        Console.WriteLine();
-                        Console.WriteLine("Please choose a valid color.");
-                    }
-                    else
-                    {
-                        break;
+                        if ( !String.IsNullOrEmpty(colorChoice) )
+                        {
+                            colorChoice = colorChoice.ToLower();
+                            colorChoice = Char.ToUpper(colorChoice[0]) + colorChoice.Substring(1);
+                            
+                            if (colorChoice != red.Name && colorChoice != blue.Name && colorChoice != yellow.Name)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Please choose a valid color.");
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Please choose a color.");
+                        }
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Please choose a color.");
-                }
-            }
-
             }
 
             while(true)
