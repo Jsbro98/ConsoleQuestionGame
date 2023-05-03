@@ -14,8 +14,9 @@
             "args": [],
             "cwd": "${workspaceFolder}/ConsoleApp",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
-            "console": "internalConsole",
-            "stopAtEntry": false
+            "console": "integratedTerminal",
+            "stopAtEntry": false,
+            "enableStepFiltering": false,
         },
         {
             "name": ".NET Core Attach",
