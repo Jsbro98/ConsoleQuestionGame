@@ -41,59 +41,6 @@ namespace ConsoleApp
             string representsChoice;
             char favoriteColorChoice;
 
-            string WriteQuestionAndCheckResponse(string propertyName)
-            {
-                PropertyInfo? propInfo = typeof(Color).GetProperty(propertyName);
-                object? propValueRed = null;
-                object? propValueBlue = null;
-                object? propValueYellow = null;
-
-
-                if (propInfo is not null)
-                {
-                    propValueRed = propInfo.GetValue(red);
-                    propValueBlue = propInfo.GetValue(blue);
-                    propValueYellow = propInfo.GetValue(yellow);
-                }
-
-
-                if (propValueRed is not null && propValueBlue is not null && propValueYellow is not null)
-                {
-                    while(true)
-                    {
-                        Console.Write(propValueRed + " ");
-                        Console.Write(propValueBlue + " ");
-                        Console.Write(propValueYellow);
-
-                        Console.WriteLine();
-
-                // Continue here -------------------------------------------------------------------------------------
-
-                        colorChoice = Console.ReadLine()!;
-
-                        if ( !String.IsNullOrEmpty(colorChoice) )
-                        {
-                            colorChoice = colorChoice.ToLower();
-                            colorChoice = Char.ToUpper(colorChoice[0]) + colorChoice.Substring(1);
-                            
-                            if (colorChoice != red.Name && colorChoice != blue.Name && colorChoice != yellow.Name)
-                            {
-                                Console.WriteLine();
-                                Console.WriteLine("Please choose a valid color.");
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Please choose a color.");
-                        }
-                    }
-                }
-            }
-
             while(true)
             {
                 foreach (Color color in colorArray)
@@ -133,7 +80,8 @@ namespace ConsoleApp
 
                 foreach (Color color in colorArray)
                 {
-                    Console.Write(color.Feeling + " ");
+                    Console.Write(color.Name + ": " + color.Feeling + " | " + " ");
+
                 }
 
                 Console.WriteLine();
@@ -152,6 +100,8 @@ namespace ConsoleApp
                     }
                     else
                     {
+                        Color color = GetColorThatMatchesChoice("Feeling", feelingChoice, colorArray);
+                        color.Count++;
                         break;
                     }
                 }
@@ -168,7 +118,7 @@ namespace ConsoleApp
 
                 foreach (Color color in colorArray)
                 {
-                    Console.Write(color.Represents + " ");
+                    Console.Write(color.Name + ": " + color.Represents + " | " + " ");
                 }
 
                 Console.WriteLine();
@@ -187,6 +137,8 @@ namespace ConsoleApp
                     }
                     else
                     {
+                        Color color = GetColorThatMatchesChoice("Represents", representsChoice, colorArray);
+                        color.Count++;
                         break;
                     }
                 }
@@ -207,6 +159,18 @@ namespace ConsoleApp
 
                     if ( Char.IsLetter(favoriteColorChoice) )
                     {
+                        bool isFavorite = ProcessFavoriteColorValue(favoriteColorChoice);
+
+                        if (isFavorite)
+                        {
+                            Color? favoriteColor = colorArray.FirstOrDefault(color => color.FavoriteColor == true);
+                            
+                            if (favoriteColor != null)
+                            {
+                                favoriteColor.Count++;
+                            }
+                        }
+
                         break;
                     }
                 }
@@ -217,6 +181,62 @@ namespace ConsoleApp
                     Console.WriteLine("Please enter (Y/N)");
                 }
             }
+
+            if (red.Count == blue.Count && blue.Count == yellow.Count)
+            {
+                throw new ArgumentException("It seems you've mixed up your answers, please try again");
+            }
+
+                int finalCount = Math.Max(red.Count, blue.Count);
+                finalCount = Math.Max(finalCount, yellow.Count);
+
+                Color? result = colorArray.FirstOrDefault(color => color.Count == finalCount);
+
+                if (result != null)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"My guess is that your color choice is {result.Name}!");
+                }
+                else
+                {
+                    throw new NullReferenceException("result is null where it should not be");
+                }
+
+        }
+
+        private static Color GetColorThatMatchesChoice(string category, string choice, Color[] colorArray)
+        {
+            foreach (Color color in colorArray)
+            {
+                PropertyInfo? propertyInfo = typeof(Color).GetProperty(category);
+                object? propertyValue = null;
+
+                if (propertyInfo != null)
+                {
+                    propertyValue = propertyInfo.GetValue(color);
+                }
+
+                if (propertyValue != null && propertyValue.ToString() == choice)
+                {
+                    return color;
+                }
+            }
+
+            throw new ArgumentException("Choice does not match any color properties");
+        }
+
+        private static bool ProcessFavoriteColorValue(char choice)
+        {
+            if (choice.Equals('y') || choice.Equals('Y'))
+            {
+                return true;
+            }
+            else if (choice.Equals('n') || choice.Equals('N'))
+            {
+                return false;
+            }
+
+            throw new ArgumentException("argument was neither 'y' or 'n'");
         }
     }
 }
